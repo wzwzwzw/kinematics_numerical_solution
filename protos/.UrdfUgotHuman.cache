@@ -1,0 +1,11 @@
+Webots Proto Cache File version 1.5
+protoFileHash: 59a8db388ed9a4281f36aaf28ae93f07
+needsRobotAncestor: 0
+baseType: Robot
+slotType: 
+parameters: translation,rotation,name,controller,controllerArgs,customData,supervisor,synchronization,selfCollision,staticBase
+tags: 
+license:  Apache License 2.0
+licenseUrl:  http://www.apache.org/licenses/LICENSE-2.0
+documentationUrl: 
+info: This\sis\sa\sproto\sfile\sfor\sWebots\sfor\sthe\sUrdfUgotHuman\nExtracted\sfrom:\s/home/vito/ros1_ws/sim_model_human/URDF/urdf_ugot_human.urdf

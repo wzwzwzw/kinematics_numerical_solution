@@ -1,0 +1,543 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  CFM 1e-07
+  ERP 0.8
+  basicTimeStep 2
+  contactProperties [
+    ContactProperties {
+      material2 "tire"
+      coulombFriction [
+        0.9
+      ]
+      bounce 0.3
+      bounceVelocity 0.003
+      softERP 0.4
+      softCFM 0.000208
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.010920147331197573 0.727955220524196 0.6855377066900361 3.162159602374601
+  position -0.34821237097815166 3.755229586264727 0.48999939471894555
+  followSmoothness 0.3
+}
+Background {
+  skyColor [
+    0.827451 0.843137 0.811765
+  ]
+}
+DirectionalLight {
+  intensity 1.5
+  castShadows TRUE
+}
+Floor {
+  rotation 1 0 0 1.5707996938995745
+  size 100 50
+  tileSize 1 1
+}
+DEF stair Group {
+  children [
+    Transform {
+      translation -6 0 0
+      rotation 0 0 1 3.141592653589793
+      children [
+        Table {
+          translation 0 0 2.03025e-05
+          rotation 1 0 0 1.5707996938995745
+          size 3 0.9 3
+        }
+        StraightStairs {
+          translation 2.77 9.97008e-07 1.60375e-05
+          rotation 3.390508950807168e-09 0.70710578118615 0.707107781185531 3.14159
+          stepSize 0.28 0.03 3
+          stepRise 0.17
+          leftRail []
+          rightRail []
+        }
+        Wall {
+          translation -2.58 -1.5 0.45
+          rotation 0 -1 0 0.3926996938995746
+          name "15d_slope"
+          size 2.35181 3 0.01
+          appearance Roughcast {
+            colorOverride 0.560784 0.34902 0.00784314
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+DEF slope Group {
+  children [
+    Transform {
+      translation 5.79 -5.27 0
+      rotation 0 0 1 0
+      children [
+        DEF _20deg Wall {
+          translation 1.68687 0 0.25
+          rotation 0 1 0 0.34906585
+          name "20deg"
+          size 1.462 3 0.01
+          appearance Roughcast {
+            colorOverride 0.533333 0.541176 0.521569
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+        DEF _10deg Wall {
+          translation -2.415 0 0.25
+          rotation 0 1 0 -0.174532925
+          name "10deg"
+          size 2.87939 3 0.001
+          appearance Roughcast {
+            colorOverride 0.533333 0.541176 0.521569
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+        DEF plat Wall {
+          translation 0 0 0.5
+          size 2 3 0.01
+          appearance Roughcast {
+            colorOverride 0.533333 0.541176 0.521569
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+DEF obs Group {
+  children [
+    Transform {
+      rotation 0 0 1 0
+      children [
+        DEF _5cm Wall {
+          translation 0.47 -4.8 0.015
+          name "obs_5cm"
+          size 0.6 2 0.03
+          appearance Roughcast {
+            colorOverride 0.533333 0.541176 0.521569
+            textureTransform TextureTransform {
+              scale 1 2.4
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+DEF suport Group {
+  children [
+    Transform {
+      rotation 0 0 1 0
+    }
+  ]
+}
+Robot {
+  translation 8.898581463021486e-07 -1.1185433461011363e-05 0.5755498400915
+  rotation 0.9138279134907963 0.4061016430951955 6.635645182484469e-07 3.7156441868722805e-06
+  children [
+    DEF SUP Transform {
+      translation 0 0 -1.14
+      children [
+        SliderJoint {
+          jointParameters JointParameters {
+            position 0.10000002987299994
+            minStop -0.1
+            maxStop 0.1
+          }
+          device [
+            LinearMotor {
+              minPosition -0.1
+              maxPosition 0.1000000221126853
+            }
+          ]
+          endPoint Solid {
+            translation -1.395968089865997e-19 7.659904611642676e-14 0.750000029873
+            rotation -0.9999999988440672 4.808186673532196e-05 1.1154269190148404e-10 6.534405524773712e-14
+            boundingObject Box {
+              size 1.2 1.2 0.4
+            }
+            physics Physics {
+            }
+            linearVelocity -4.611798124451517e-15 -4.864969772902383e-10 -3.3131385749972095e-11
+            angularVelocity 3.5339774855451223e-14 -2.3750713400777758e-14 -2.5403999568316544e-14
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2.517905883792082e-10
+        anchor 0 -0.0708 0
+      }
+      device [
+        RotationalMotor {
+          name "right_hip_roll_joint"
+          controlPID 90 0 0.2
+        }
+        PositionSensor {
+          name "right_hip_roll_joint_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.0708 0
+        rotation 1 0 0 0
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position -0.5333452487910817
+              axis 0 1 0
+              anchor 0 0.0165 -0.0527
+            }
+            device [
+              RotationalMotor {
+                name "right_hip_pitch_joint"
+                controlPID 90 0 0.2
+              }
+              PositionSensor {
+                name "right_hip_pitch_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0 0.0165 -0.0527
+              rotation -1.70448312569927e-15 -1 2.857711641096745e-16 0.533345248791082
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position 1.0666904975821547
+                    axis 0 1 0
+                    anchor 0 0 -0.072
+                  }
+                  device [
+                    RotationalMotor {
+                      name "right_knee_pitch_joint"
+                      controlPID 90 0 0.2
+                    }
+                    PositionSensor {
+                      name "right_knee_pitch_joint_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 0 -0.072
+                    rotation -4.370082747703975e-16 1 1.7985818340394226e-16 1.066690497582155
+                    children [
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          position -0.5333452489107833
+                          axis 0 1 0
+                          anchor 0 0 -0.072
+                        }
+                        device [
+                          RotationalMotor {
+                            name "right_ankle_pitch_joint"
+                            controlPID 90 0 0.2
+                          }
+                          PositionSensor {
+                            name "right_ankle_pitch_joint_sensor"
+                          }
+                        ]
+                        endPoint Solid {
+                          translation 0 0 -0.072
+                          rotation -2.3069197682552634e-16 -1 -6.302026700550024e-17 0.5333452489107835
+                          children [
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.1546319456101628e-14
+                                anchor 0 0 -0.0527
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "right_ankle_roll_joint"
+                                  controlPID 90 0 0.2
+                                }
+                                PositionSensor {
+                                  name "right_ankle_roll_joint_sensor"
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 0 -0.0527
+                                rotation -0.9999394053211784 0.01100843703384969 3.302058736120472e-09 1.2129775854241914e-14
+                                children [
+                                  Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0 0 1
+                                    }
+                                    geometry Box {
+                                      size 0.1 0.08 0.02
+                                    }
+                                  }
+                                ]
+                                physics Physics {
+                                  mass 0.3
+                                }
+                                linearVelocity 2.813507901934517e-13 -4.861876362561342e-10 -3.2496395885645374e-11
+                                angularVelocity -9.253806227624726e-13 -8.479657458628617e-13 -2.541097607464973e-14
+                              }
+                            }
+                            Shape {
+                              appearance PBRAppearance {
+                                baseColor 1 0 0
+                              }
+                              geometry Sphere {
+                                radius 0.02
+                              }
+                            }
+                          ]
+                          physics Physics {
+                            mass 0.3
+                          }
+                          linearVelocity 2.3666387161811734e-13 -4.862619267511093e-10 -3.250294034928413e-11
+                          angularVelocity 1.4096555785763058e-12 -8.480052032179422e-13 -2.5414501631578174e-14
+                        }
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColor 1 0 0
+                        }
+                        geometry Sphere {
+                          radius 0.02
+                        }
+                      }
+                    ]
+                    physics Physics {
+                      mass 0.3
+                    }
+                    linearVelocity 6.018411547247367e-13 -4.86350240775073e-10 -3.272854826631525e-11
+                    angularVelocity 1.4096500627686497e-12 5.805563246072187e-12 -2.5391820745185132e-14
+                  }
+                }
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0 0
+                  }
+                  geometry Sphere {
+                    radius 0.02
+                  }
+                }
+              ]
+              physics Physics {
+                mass 0.5
+              }
+              linearVelocity -1.4369310225831078e-14 -4.864367351540739e-10 -3.306599792995731e-11
+              angularVelocity 1.4096673221554804e-12 -9.894531187051611e-12 -2.5445188539545714e-14
+            }
+          }
+          Shape {
+            appearance PBRAppearance {
+              baseColor 1 0 0
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+        ]
+        name "solid(1)"
+        physics Physics {
+          mass 0.2
+        }
+        linearVelocity -1.6067324669682258e-14 -4.865109457044935e-10 -3.314947864568904e-11
+        angularVelocity 1.4096803745742772e-12 -2.471926435723575e-14 -2.541175790555792e-14
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2.518319203940028e-10
+        anchor 0 0.0708 0
+      }
+      device [
+        PositionSensor {
+          name "left_hip_roll_joint_sensor"
+        }
+        RotationalMotor {
+          name "left_hip_roll_joint"
+          controlPID 90 0 0.2
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.0708 0
+        rotation 1 0 0 0
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position -0.533345248791254
+              axis 0 1 0
+              anchor 0 -0.0165 -0.0527
+            }
+            device [
+              RotationalMotor {
+                name "left_hip_pitch_joint"
+                controlPID 90 0 0.2
+              }
+              PositionSensor {
+                name "left_hip_pitch_joint_sensor"
+              }
+            ]
+            endPoint Solid {
+              translation 0 -0.0165 -0.0527
+              rotation -1.702774650664596e-15 -1 2.8527896376856023e-16 0.5333452487912539
+              children [
+                HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position 1.0666904975823779
+                    axis 0 1 0
+                    anchor 0 0 -0.072
+                  }
+                  device [
+                    RotationalMotor {
+                      name "left_knee_pitch_joint"
+                      controlPID 90 0 0.2
+                    }
+                    PositionSensor {
+                      name "left_knee_pitch_joint_sensor"
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 0 -0.072
+                    rotation -4.3654199721860856e-16 1 1.7988338196744398e-16 1.066690497582378
+                    children [
+                      HingeJoint {
+                        jointParameters HingeJointParameters {
+                          position -0.533345248910857
+                          axis 0 1 0
+                          anchor 0 0 -0.072
+                        }
+                        device [
+                          RotationalMotor {
+                            name "left_ankle_pitch_joint"
+                            controlPID 90 0 0.2
+                          }
+                          PositionSensor {
+                            name "left_ankle_pitch_joint_sensor"
+                          }
+                        ]
+                        endPoint Solid {
+                          translation 0 0 -0.072
+                          rotation -2.3044155196970006e-16 -1 -6.295216478614771e-17 0.5333452489108577
+                          children [
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -7.638334409421077e-14
+                                anchor 0 0 -0.0527
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "left_ankle_roll_joint"
+                                  controlPID 90 0 0.2
+                                }
+                                PositionSensor {
+                                  name "left_ankle_roll_joint_sensor"
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 0 -0.0527
+                                rotation -0.9999998792173245 0.0004914929668246219 -6.905773708636794e-10 7.679846600641961e-14
+                                children [
+                                  Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0.333333 0 1
+                                    }
+                                    geometry Box {
+                                      size 0.1 0.08 0.02
+                                    }
+                                  }
+                                ]
+                                physics Physics {
+                                  mass 0.3
+                                }
+                                linearVelocity -5.362095501744637e-13 -4.871132263600815e-10 -3.4202409659171e-11
+                                angularVelocity 1.6786832316066598e-12 1.4750293511182343e-12 -2.540632752321282e-14
+                              }
+                            }
+                            Shape {
+                              appearance PBRAppearance {
+                                baseColor 1 0 0
+                              }
+                              geometry Sphere {
+                                radius 0.02
+                              }
+                            }
+                          ]
+                          physics Physics {
+                            mass 0.3
+                          }
+                          linearVelocity -4.58489425770998e-13 -4.869742505978457e-10 -3.420898376157071e-11
+                          angularVelocity -2.6374424123408823e-12 1.4752781027472698e-12 -2.5399813744312264e-14
+                        }
+                      }
+                      Shape {
+                        appearance PBRAppearance {
+                          baseColor 1 0 0
+                        }
+                        geometry Sphere {
+                          radius 0.02
+                        }
+                      }
+                    ]
+                    physics Physics {
+                      mass 0.3
+                    }
+                    linearVelocity -1.1951212901264578e-12 -4.86811678094339e-10 -3.3786276638184166e-11
+                    angularVelocity -2.6375941017760794e-12 -1.1908119083944315e-11 -2.5445137089584606e-14
+                  }
+                }
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0 0
+                  }
+                  geometry Sphere {
+                    radius 0.02
+                  }
+                }
+              ]
+              physics Physics {
+                mass 0.5
+              }
+              linearVelocity -1.125372797818154e-14 -4.866472334823363e-10 -3.3084791506978736e-11
+              angularVelocity -2.6381847875239377e-12 1.9095743233674115e-11 -2.533801391235692e-14
+            }
+          }
+          Shape {
+            appearance PBRAppearance {
+              baseColor 1 0 0
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+        ]
+        physics Physics {
+          mass 0.2
+        }
+        linearVelocity -1.2368053374244378e-14 -4.86510984925052e-10 -3.3144220623482884e-11
+        angularVelocity -2.6392326829316626e-12 -2.6771497665855766e-14 -2.540347560575305e-14
+      }
+    }
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.333333 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "UrdfUgotHuman"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+    mass 10
+  }
+  controller "webots_controller_node"
+  linearVelocity -1.4263748181582914e-14 -4.865109964610553e-10 -3.315227274924837e-11
+  angularVelocity 3.7820217208442776e-14 -2.543163959757316e-14 -2.541202249436561e-14
+}
